@@ -82,3 +82,41 @@ IMAGE_TO_WORD_CHALLENGES = [
     },
     # Adicione quantos desafios quiser...
 ]
+
+
+SENTENCE_SCRAMBLE_CHALLENGES = [
+    {
+        "id": "gato_bebe",
+        "image": "assets/images/gato_leite.jpg",
+        # 'words' são as opções que serão embaralhadas
+        "words": ["O", "gato", "bebe", "leite", "."],
+        # 'correct' é a resposta final exata
+        "correct": "O gato bebe leite ."
+    },
+    {
+        "id": "menina_pula",
+        "image": "assets/images/menina_corda.jpg",
+        "words": ["A", "menina", "pula", "corda", "."],
+        "correct": "A menina pula corda ."
+    },
+    # Adicione mais desafios...
+]
+
+# ---
+# Dados para o Módulo 6: Ditado de Frases
+# ---
+DICTATION_CHALLENGES = [
+    {
+        "id": "sol_brilha",
+        "image": "assets/images/sol.jpg",
+        "sentence": "O sol brilha forte", # Texto para o gTTS falar
+        "correct": "O sol brilha forte"  # Texto que o usuário deve digitar
+    },
+    {
+        "id": "cachorro_late",
+        "image": "assets/images/cachorro.jpg",
+        "sentence": "O cachorro late no portão",
+        "correct": "O cachorro late no portão"
+    },
+    # Adicione mais desafios...
+]
