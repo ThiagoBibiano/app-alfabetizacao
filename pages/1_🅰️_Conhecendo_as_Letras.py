@@ -10,6 +10,7 @@ import os
 from core.audio_utils import generate_audio_mp3
 from core.data_manager import LETTER_EXAMPLES
 
+
 def main():
     """Função principal para renderizar a página do Módulo 1."""
     st.title("🅰️ Conhecendo as Letras e os Sons")
@@ -42,7 +43,7 @@ def main():
 
         # Mostra a imagem (com verificação se o arquivo existe)
         if os.path.exists(caminho_imagem):
-            st.image(caminho_imagem, use_column_width=True)
+            st.image(caminho_imagem, use_container_width=True)
         else:
             st.warning(
                 f"Imagem {caminho_imagem} não encontrada. "
@@ -67,6 +68,7 @@ def main():
                 audio_bytes = generate_audio_mp3(palavra)
                 if audio_bytes:
                     st.audio(audio_bytes, format='audio/mp3')
+
 
 if __name__ == "__main__":
     main()
