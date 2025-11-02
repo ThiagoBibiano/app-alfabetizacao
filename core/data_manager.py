@@ -53,3 +53,32 @@ COMPLETE_WORD_CHALLENGES = [
     },
     # Adicione quantos desafios quiser...
 ]
+
+
+# (O código anterior: LETTER_EXAMPLES, COMPLETE_WORD_CHALLENGES, etc. ficam acima)
+# ...
+
+# ---
+# Dados para o Módulo 4: O que é isso? (Imagem -> Palavra)
+# ---
+IMAGE_TO_WORD_CHALLENGES = [
+    {
+        "id": "uva",
+        "image": "assets/images/uva.jpg",
+        "correct": "uva",  # A resposta correta
+        "hint": "U-VA"   # Dica (opcional, para uma futura funcionalidade)
+    },
+    {
+        "id": "dado",
+        "image": "assets/images/dado.jpg",
+        "correct": "dado",
+        "hint": "DA-DO"
+    },
+    {
+        "id": "elefante",
+        "image": "assets/images/elefante.jpg",
+        "correct": "elefante",
+        "hint": "E-LE-FAN-TE"
+    },
+    # Adicione quantos desafios quiser...
+]
