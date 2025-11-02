@@ -55,7 +55,7 @@ def main():
         st.audio(audio_bytes, format='audio/mp3')
 
     # Botão de reforço positivo
-    if st.button("Adorei formar esta sílaba! 🎉", use_container_width=True):
+    if st.button("Adorei formar esta sílaba! 🎉", width=300):
         st.balloons()
         st.success(f"EBA! Parabéns por formar a sílaba '{silaba_formada}'!")
 

@@ -42,7 +42,7 @@ def main():
     st.markdown("### Olhe a imagem e clique nas palavras na ordem certa:")
 
     if os.path.exists(challenge["image"]):
-        st.image(challenge["image"], use_container_width=True)
+        st.image(challenge["image"], width=300)
     else:
         st.error(f"Imagem não encontrada em: {challenge['image']}")
 
@@ -65,7 +65,7 @@ def main():
         cols = st.columns(len(remaining_words))
         for i, word in enumerate(remaining_words):
             with cols[i]:
-                if st.button(word, key=f"word_{word}_{i}", use_container_width=True):
+                if st.button(word, key=f"word_{word}_{i}", width=300):
                     add_word_to_scramble_attempt(GAME_KEY, word)
                     st.rerun()
 
@@ -74,13 +74,13 @@ def main():
 
     # Só mostra "Verificar" se o usuário usou todas as palavras
     if not remaining_words and game_status == "playing":
-        if st.button("Verificar Frase ✅", use_container_width=True, type="primary"):
+        if st.button("Verificar Frase ✅", width=300, type="primary"):
             check_scramble_answer(GAME_KEY)
             st.rerun()
 
     # Botão para Limpar a tentativa
     if user_attempt_list and game_status == "playing":
-        if st.button("Limpar ❌", use_container_width=True):
+        if st.button("Limpar ❌", width=300):
             clear_scramble_attempt(GAME_KEY)
             st.rerun()
 
@@ -94,13 +94,13 @@ def main():
         if audio_bytes:
             st.audio(audio_bytes, autoplay=True)
 
-        if st.button("Próxima Frase ➔", use_container_width=True, type="primary"):
+        if st.button("Próxima Frase ➔", width=300, type="primary"):
             st.rerun()
 
     elif game_status == "wrong":
         st.error("Ops! Essa não é a ordem correta. Tente de novo!")
         # Permite ao usuário tentar de novo
-        if st.button("Tentar Novamente 🔄", use_container_width=True):
+        if st.button("Tentar Novamente 🔄", width=300):
             clear_scramble_attempt(GAME_KEY)
             st.rerun()
 

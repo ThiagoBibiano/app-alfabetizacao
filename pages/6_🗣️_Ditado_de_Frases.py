@@ -37,13 +37,13 @@ def main():
     st.markdown("### Ouça a frase e escreva o que você ouviu:")
 
     if os.path.exists(challenge["image"]):
-        st.image(challenge["image"], use_container_width=True)
+        st.image(challenge["image"], width=300)
     else:
         st.warning(f"Imagem de dica não encontrada em: {challenge['image']}")
 
     # Botão para tocar o áudio
     sentence_to_say = challenge["sentence"]
-    if st.button("Ouvir a frase 🔊", use_container_width=True):
+    if st.button("Ouvir a frase 🔊", width=300):
         audio_bytes = generate_audio_mp3(sentence_to_say)
         if audio_bytes:
             st.audio(audio_bytes, autoplay=True)
@@ -57,7 +57,7 @@ def main():
 
         submit_button = st.form_submit_button(
             "Verificar Ditado ✅",
-            use_container_width=True,
+            width=300,
             disabled=(st.session_state[f"{GAME_KEY}_status"] == "correct")
         )
 
@@ -73,7 +73,7 @@ def main():
         st.success(f"**MUITO BEM!** Você escreveu: **{correct_sentence}**")
         st.balloons()
 
-        if st.button("Próximo Ditado ➔", use_container_width=True, type="primary"):
+        if st.button("Próximo Ditado ➔", width=300, type="primary"):
             st.rerun()
 
     elif game_status == "wrong":
