@@ -39,7 +39,7 @@ def main():
 
     # Exibe a imagem
     if os.path.exists(challenge["image"]):
-        st.image(challenge["image"], use_container_width=True)
+        st.image(challenge["image"], width=300)
     else:
         st.error(f"Imagem não encontrada em: {challenge['image']}")
 
@@ -56,7 +56,7 @@ def main():
     for i, option in enumerate(options):
         with cols[i]:
             # --- 4. Lógica de Verificação (Controle) ---
-            if st.button(option, key=f"{GAME_KEY}_{option}", use_container_width=True):
+            if st.button(option, key=f"{GAME_KEY}_{option}", width=300):
                 # O usuário clicou, vamos checar a resposta
                 check_user_answer(GAME_KEY, option)
                 # Força um rerun imediato para mostrar o feedback (Correto/Errado)
@@ -76,7 +76,7 @@ def main():
             st.audio(audio_bytes, autoplay=True)
 
         # Botão para ir para o próximo desafio
-        if st.button("Próxima Palavra ➔", use_container_width=True, type="primary"):
+        if st.button("Próxima Palavra ➔", width=300, type="primary"):
             # O status já é "correct", então no próximo rerun ele vai
             # acionar a lógica no passo 2 e pegar um novo desafio.
             st.rerun()

@@ -43,7 +43,7 @@ def main():
 
         # Mostra a imagem (com verificação se o arquivo existe)
         if os.path.exists(caminho_imagem):
-            st.image(caminho_imagem, use_container_width=True)
+            st.image(caminho_imagem, width=300)
         else:
             st.warning(
                 f"Imagem {caminho_imagem} não encontrada. "
@@ -56,7 +56,7 @@ def main():
         # Botão para ouvir o som da LETRA
         with col1:
             if st.button(f"Ouvir o som da letra '{letra_escolhida}'",
-                         use_container_width=True):
+                         width=300):
                 audio_bytes = generate_audio_mp3(letra_escolhida)
                 if audio_bytes:
                     st.audio(audio_bytes, format='audio/mp3')
@@ -64,7 +64,7 @@ def main():
         # Botão para ouvir o som da PALAVRA
         with col2:
             if st.button(f"Ouvir a palavra '{palavra}'",
-                         use_container_width=True):
+                         width=300):
                 audio_bytes = generate_audio_mp3(palavra)
                 if audio_bytes:
                     st.audio(audio_bytes, format='audio/mp3')

@@ -37,7 +37,7 @@ def main():
 
     # Exibe a imagem (usando a correção 'use_container_width')
     if os.path.exists(challenge["image"]):
-        st.image(challenge["image"], use_container_width=True)
+        st.image(challenge["image"], width=300)
     else:
         st.error(f"Imagem não encontrada em: {challenge['image']}")
 
@@ -54,7 +54,7 @@ def main():
 
         submit_button = st.form_submit_button(
             "Verificar Resposta ✅",
-            use_container_width=True,
+            width=300,
             # Desabilita o botão se já acertou
             disabled=(st.session_state[f"{GAME_KEY}_status"] == "correct")
         )
@@ -80,7 +80,7 @@ def main():
             st.audio(audio_bytes, autoplay=True)
 
         # Botão para ir para o próximo desafio
-        if st.button("Próxima Imagem ➔", use_container_width=True, type="primary"):
+        if st.button("Próxima Imagem ➔", width=300, type="primary"):
             # O status já é "correct", então no próximo rerun ele vai
             # acionar a lógica no passo 2 e pegar um novo desafio.
             st.rerun()
