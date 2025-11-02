@@ -85,3 +85,102 @@ def check_user_answer(game_key: str, user_answer: str) -> bool:
     else:
         st.session_state[f"{game_key}_status"] = "wrong"
         return False
+
+
+def initialize_scramble_game(game_key: str, challenges: List[Dict[str, Any]]):
+    """Inicializa o estado da sessão para o jogo de organizar frases.
+
+    Reutiliza a inicialização padrão e adiciona chaves de estado
+    específicas para este jogo (tentativa do usuário e palavras restantes).
+
+    Args:
+        game_key: A chave única do jogo (ex: "scramble_sentence").
+        challenges: A lista de desafios do data_manager.
+    """
+    # 1. Roda a inicialização padrão
+    initialize_game_state(game_key, challenges)
+
+    # 2. Adiciona chaves de estado específicas deste jogo
+    if f"{game_key}_user_attempt" not in st.session_state:
+        st.session_state[f"{game_key}_user_attempt"] = []  # Palavras clicadas
+    if f"{game_key}_remaining_words" not in st.session_state:
+        st.session_state[f"{game_key}_remaining_words"] = [] # Palavras-botão
+
+def setup_scramble_challenge(game_key: str):
+    """Configura um novo desafio de organizar frases.
+
+    Esta função pega um novo desafio, embaralha as palavras-botão
+    e reseta o estado da tentativa do usuário.
+
+    Args:
+        game_key: A chave do jogo.
+    """
+    # 1. Pega um novo desafio usando a lógica padrão
+    get_new_challenge(game_key)
+
+    # 2. Configura as palavras
+    challenge = st.session_state[f"{game_key}_challenge"]
+    if challenge:
+        # Copia a lista de palavras e a embaralha
+        words_to_scramble = list(challenge["words"])
+        random.shuffle(words_to_scramble)
+
+        # 3. Reseta o estado do jogo para este novo desafio
+        st.session_state[f"{game_key}_user_attempt"] = []
+        st.session_state[f"{game_key}_remaining_words"] = words_to_scramble
+        st.session_state[f"{game_key}_status"] = "playing"
+
+def add_word_to_scramble_attempt(game_key: str, word: str):
+    """Adiciona uma palavra clicada à tentativa do usuário.
+
+    Move a palavra da lista 'remaining_words' para a lista 'user_attempt'.
+
+    Args:
+        game_key: A chave do jogo.
+        word: A palavra que foi clicada.
+    """
+    if word in st.session_state[f"{game_key}_remaining_words"]:
+        st.session_state[f"{game_key}_user_attempt"].append(word)
+        st.session_state[f"{game_key}_remaining_words"].remove(word)
+        st.session_state[f"{game_key}_status"] = "playing"
+
+def clear_scramble_attempt(game_key: str):
+    """Limpa a tentativa do usuário e restaura os botões.
+
+    Chamado quando o usuário clica em 'Limpar'.
+    """
+    challenge = st.session_state[f"{game_key}_challenge"]
+    if challenge:
+        words_to_scramble = list(challenge["words"])
+        random.shuffle(words_to_scramble)
+        st.session_state[f"{game_key}_user_attempt"] = []
+        st.session_state[f"{game_key}_remaining_words"] = words_to_scramble
+        st.session_state[f"{game_key}_status"] = "playing"
+
+def check_scramble_answer(game_key: str) -> bool:
+    """Verifica a frase montada pelo usuário.
+
+    Junta as palavras da 'user_attempt' e compara com a
+    resposta correta. Atualiza o status do jogo.
+
+    Args:
+        game_key: A chave do jogo.
+
+    Returns:
+        True se a resposta estiver correta, False caso contrário.
+    """
+    attempt_list = st.session_state[f"{game_key}_user_attempt"]
+    user_sentence = " ".join(attempt_list)
+
+    challenge = st.session_state[f"{game_key}_challenge"]
+    correct_sentence = challenge["correct"]
+
+    # Comparação exata, case-sensitive
+    is_correct = (user_sentence.strip() == correct_sentence.strip())
+
+    if is_correct:
+        st.session_state[f"{game_key}_status"] = "correct"
+        return True
+    else:
+        st.session_state[f"{game_key}_status"] = "wrong"
+        return False
